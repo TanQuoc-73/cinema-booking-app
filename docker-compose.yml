@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  next-app:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - spring-service
+      - node-service
+
+  node-service:
+    build:
+      context: ./backend/nodejs
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./backend/nodejs/.env
+
+  spring-service:
+    build:
+      context: ./backend/spring/be         # Đây là nơi chứa mã nguồn Spring
+      dockerfile: ../Dockerfile            # Trỏ tới Dockerfile ở thư mục cha (spring)
+    ports:
+      - "8080:8080"

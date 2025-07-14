@@ -1,0 +1,10 @@
+{
+  "name": "cinema-booking-app",
+  "private": true,
+  "version": "1.0.0",
+  "packageManager": "pnpm@10.12.3",
+  "workspaces": [
+    "frontend",
+    "services/*"
+  ]
+}

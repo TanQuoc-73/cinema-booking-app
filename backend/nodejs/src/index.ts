@@ -8,13 +8,13 @@ dotenv.config();
 const app: Application = express();
 const PORT = process.env.PORT || 5000;
 
-// Middlewares
+// Middlewares test 
 app.use(cors());
 app.use(express.json());
 
 // Route test
 app.get('/', (req: Request, res: Response) => {
-  res.send('Auth service is running 🚀');
+  res.send('Service is running 🚀');
 });
 
 // Start server

@@ -14,7 +14,7 @@ export default function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 text-red-500 text-xl font-bold">
           <FaFilm />
-          <span>RạpPhim</span>
+          <span>LOGO</span>
         </Link>
 
         {/* Navigation */}

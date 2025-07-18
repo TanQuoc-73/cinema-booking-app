@@ -1,20 +1,21 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useState, useRef } from "react"
+import Link from "next/link";
+import { useState, useRef } from "react";
+import clsx from "clsx"; // bạn cần cài: npm i clsx (nếu chưa có)
 
 export default function ShowtimeDropdown() {
-  const [open, setOpen] = useState(false)
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const [open, setOpen] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleMouseEnter = () => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current)
-    setOpen(true)
-  }
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setOpen(true);
+  };
 
   const handleMouseLeave = () => {
-    timeoutRef.current = setTimeout(() => setOpen(false), 200)
-  }
+    timeoutRef.current = setTimeout(() => setOpen(false), 200);
+  };
 
   return (
     <div
@@ -22,30 +23,32 @@ export default function ShowtimeDropdown() {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Trigger */}
-      <div className="text-white hover:text-red-500 font-medium transition cursor-pointer">
+      {/* Trigger với hiệu ứng khi dropdown mở */}
+      <div
+        className={clsx(
+          "px-3 py-1 rounded-md transition cursor-pointer font-medium",
+          open ? "bg-red-500 text-white shadow-md" : "text-white hover:text-red-500"
+        )}
+      >
         Lịch chiếu
       </div>
 
-      {/* Dropdown full-width */}
+      {/* Dropdown menu */}
       {open && (
-        <div className="fixed left-0 right-0 top-[80px] z-40 bg-black/40 text-white shadow-lg">
-          <div className="max-w-7xl mx-auto px-4 py-4 grid grid-cols-3 gap-6">
-            <Link href="/showtimes/today" className="hover:text-red-400 font-medium">
-              <h3 className="text-lg mb-1">Lịch chiếu hôm nay</h3>
-              <p className="text-sm text-gray-300">Xem toàn bộ suất chiếu đang diễn ra trong ngày.</p>
-            </Link>
-            <Link href="/showtimes/week" className="hover:text-red-400 font-medium">
-              <h3 className="text-lg mb-1">Tuần này</h3>
-              <p className="text-sm text-gray-300">Tổng hợp các phim chiếu theo lịch trong tuần.</p>
-            </Link>
-            <Link href="/showtimes/coming-soon" className="hover:text-red-400 font-medium">
-              <h3 className="text-lg mb-1">Sắp chiếu</h3>
-              <p className="text-sm text-gray-300">Xem các phim sắp được công chiếu tại rạp.</p>
-            </Link>
-          </div>
+        <div
+          className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-[80vw] max-w-4xl h-[100px] bg-black/50 text-white rounded-lg shadow-lg z-50 flex items-center justify-around"
+        >
+          <Link href="/showtimes/today" className="px-4 py-2 hover:underline">
+            Hôm nay
+          </Link>
+          <Link href="/showtimes/week" className="px-4 py-2 hover:underline">
+            Tuần này
+          </Link>
+          <Link href="/showtimes/coming-soon" className="px-4 py-2 hover:underline">
+            Sắp chiếu
+          </Link>
         </div>
       )}
     </div>
-  )
+  );
 }

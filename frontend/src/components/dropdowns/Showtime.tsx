@@ -36,7 +36,7 @@ export default function ShowtimeDropdown() {
       {/* Dropdown menu */}
       {open && (
         <div
-          className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-[80vw] max-w-4xl h-[100px] bg-black/50 text-white rounded-lg shadow-lg z-50 flex items-center justify-around"
+          className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-[80vw] max-w-4xl h-[300px] bg-black/50 text-white rounded-lg shadow-lg z-50 flex justify-around"
         >
           <Link href="/showtimes/today" className="px-4 py-2 hover:underline">
             Hôm nay

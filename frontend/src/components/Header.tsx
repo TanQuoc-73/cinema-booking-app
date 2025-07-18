@@ -1,8 +1,11 @@
+"use client";
+
 import Link from 'next/link';
 import { FaSearch, FaUserAlt, FaTicketAlt, FaFilm } from 'react-icons/fa';
 
+import ShowtimeDropdown from './dropdowns/Showtime';
+
 const navItems = [
-  { label: 'Lịch chiếu', href: '/showtimes' },
   { label: 'Rạp phim', href: '/cinemas' },
   { label: 'Khuyến mãi', href: '/promotions' },
 ];
@@ -10,7 +13,8 @@ const navItems = [
 export default function Header() {
   return (
     <header className="bg-black shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between h-20">
+        
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 text-red-500 text-xl font-bold">
           <FaFilm />
@@ -19,6 +23,7 @@ export default function Header() {
 
         {/* Navigation */}
         <nav className="hidden md:flex items-center gap-6">
+          <ShowtimeDropdown />
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -32,9 +37,18 @@ export default function Header() {
 
         {/* Actions */}
         <div className="flex items-center gap-4">
-          <Link href="/search" className="text-gray-300 hover:text-red-500">
-            <FaSearch size={18} />
-          </Link>
+          {/* Search box */}
+          <form action="/search" method="GET" className="hidden md:flex items-center bg-gray-800 rounded px-3 py-1 gap-2">
+            <FaSearch className="text-gray-400" />
+            <input
+              type="text"
+              name="q"
+              placeholder="Tìm phim..."
+              className="bg-transparent text-white placeholder-gray-400 outline-none text-sm w-40"
+            />
+          </form>
+
+          {/* Other icons */}
           <Link href="/my-tickets" className="text-gray-300 hover:text-red-500">
             <FaTicketAlt size={18} />
           </Link>

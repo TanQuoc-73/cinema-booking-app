@@ -1,0 +1,36 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 1056353909569-6rua5jsrhkm1uvupcdm6n1fjbj5023lu.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - email
+              - profile
+          facebook:
+            client-id: YOUR_FACEBOOK_CLIENT_ID
+            client-secret: YOUR_FACEBOOK_CLIENT_SECRET
+            scope:
+              - email
+        provider:
+          facebook:
+            authorization-uri: https://www.facebook.com/dialog/oauth
+            token-uri: https://graph.facebook.com/oauth/access_token
+            user-info-uri: https://graph.facebook.com/me?fields=id,name,email,picture
+
+  datasource:
+    url: jdbc:postgresql://db.omqustatlluhutwchxho.supabase.co:5432/postgres
+    username: postgres
+    password: 7324*Tan
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        '[format_sql]': true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect

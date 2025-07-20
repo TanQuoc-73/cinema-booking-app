@@ -73,6 +73,6 @@ export default function ShowtimeDropdown() {
           </Link>
         </div>
       )}
-    </div>
+    </div>  
   );
 }

@@ -10,24 +10,31 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/", "/login**", "/error", "/api/test").permitAll()  // 👈 Cho phép /api/test
+            .csrf(csrf -> csrf.disable()) // Tắt CSRF để test API dễ hơn (nếu là REST API)
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers(
+                    "/", 
+                    "/login**", 
+                    "/error", 
+                    "/api/test", 
+                    "/api/user/register"
+                ).permitAll()
                 .requestMatchers("/api/user/me").authenticated()
                 .anyRequest().authenticated()
             )
-            .exceptionHandling(exception -> exception
+            .exceptionHandling(ex -> ex
                 .authenticationEntryPoint((request, response, authException) -> {
                     response.setContentType("application/json");
                     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                    response.getWriter().write("{\"error\": \"Chưa đăng nhập\"}");
+                    response.getWriter().write("{\"error\": \"Unauthorized\"}");
                 })
             )
-            .oauth2Login(oauth2 -> oauth2
-                .defaultSuccessUrl("/home", true)
+            .oauth2Login(oauth -> oauth
+                .defaultSuccessUrl("/api/user/me", true)
             );
 
         return http.build();

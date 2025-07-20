@@ -20,7 +20,7 @@ services:
 
   spring-service:
     build:
-      context: ./backend/spring/be         # Đây là nơi chứa mã nguồn Spring
-      dockerfile: ../Dockerfile            # Trỏ tới Dockerfile ở thư mục cha (spring)
+      context: ./backend/spring/be         
+      dockerfile: ../Dockerfile           
     ports:
       - "8080:8080"

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { FaSearch, FaUserAlt, FaTicketAlt, FaFilm } from 'react-icons/fa';
-
 import ShowtimeDropdown from './dropdowns/Showtime';
 
 const navItems = [
@@ -11,6 +11,8 @@ const navItems = [
 ];
 
 export default function Header() {
+  const pathname = usePathname();
+
   return (
     <header className="bg-black shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between h-20">
@@ -28,7 +30,11 @@ export default function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-white hover:text-red-500 font-medium transition"
+              className={`font-medium transition ${
+                pathname === item.href
+                  ? 'text-red-500 '
+                  : 'text-white hover:text-red-500'
+              }`}
             >
               {item.label}
             </Link>
@@ -38,7 +44,7 @@ export default function Header() {
         {/* Actions */}
         <div className="flex items-center gap-4">
           {/* Search box */}
-          <form action="/search" method="GET" className="hidden md:flex items-center bg-gray-800 rounded px-3 py-1 gap-2">
+          <form action="/search" method="GET" className="hidden md:flex items-center bg-gray-800 rounded-lg px-3 py-1 gap-2">
             <FaSearch className="text-gray-400" />
             <input
               type="text"
@@ -48,7 +54,7 @@ export default function Header() {
             />
           </form>
 
-          {/* Other icons */}
+          {/* Icons */}
           <Link href="/my-tickets" className="text-gray-300 hover:text-red-500">
             <FaTicketAlt size={18} />
           </Link>
